@@ -22,6 +22,18 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+    // collection
+    const furnitureCollection = client
+      .db("furni-flex")
+      .collection("all-furniture");
+
+    //   get method
+    // all furniture
+    app.get("/furniture", async (req, res) => {
+      const result = await furnitureCollection.find().toArray();
+      res.send(result);
+    });
+
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     // Send a ping to confirm a successful connection
